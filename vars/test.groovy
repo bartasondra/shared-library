@@ -25,8 +25,10 @@ def call(){
               },
               test: {
                 sh "sleep 30"
-                jsonText = sh(script:"curl -s localhost:9000",returnStdout:true)
+                jsonText = sh(script:"curl -s -X GET http://localhost:9000", returnStdout:true)
+                println jsonText
                 json = readJSON text: jsonText
+                println json
                 if (json[0].firstName == "lokesh"){
                   currentBuild.result = 'SUCCESS'
                 } else {
