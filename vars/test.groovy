@@ -18,7 +18,7 @@ def call(){
       
       stage("run"){
         steps{
-          sh "mvn spring-boot:run &"
+          sh "mvn spring-boot:run"
         }
       }
     }
