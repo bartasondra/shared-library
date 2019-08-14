@@ -23,7 +23,7 @@ def call(){
               sh "mvn spring-boot:run"
             },
             b: {
-              sh "sleep 10"
+              sh "sleep 20"
               sh "curl localhost:9000"
             }
           )
