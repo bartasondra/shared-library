@@ -24,7 +24,7 @@ def call(){
                 sh "mvn spring-boot:run"
               },
               test: {
-                sh "sleep 20"
+                sh "sleep 30"
                 jsonText = sh(script:"curl -s localhost:9000",returnStdout:true)
                 json = readJSON text: jsonText
                 if (json[0].firstName == "lokesh"){
