@@ -3,7 +3,7 @@ def call(){
     agent any
 
     stages{
-
+/*
       stage("test"){
         steps{
           sh "mvn test"
@@ -15,10 +15,18 @@ def call(){
           sh "mvn package"
         }
       }
-      
+*/      
       stage("run"){
         steps{
-          sh "mvn spring-boot:run"
+          parallel(
+            a: {
+              sh "mvn spring-boot:run"
+            },
+            b: {
+              sh "sleep 10"
+              sh "curl localhost:9000"
+            }
+          )
         }
       }
     }
