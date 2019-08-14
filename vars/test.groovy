@@ -15,6 +15,12 @@ def call(){
           sh "mvn package"
         }
       }
+      
+      stage("run"){
+        steps{
+          sh "mvn spring-boot:run &"
+        }
+      }
     }
     post{
       always{
