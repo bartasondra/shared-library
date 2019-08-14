@@ -18,15 +18,23 @@ def call(){
 */      
       stage("run"){
         steps{
-          parallel(
-            a: {
-              sh "mvn spring-boot:run"
-            },
-            b: {
-              sh "sleep 20"
-              sh "curl localhost:9000"
-            }
-          )
+          script{
+            parallel(
+              run: {
+                sh "mvn spring-boot:run"
+              },
+              test: {
+                sh "sleep 20"
+                jsonText = sh(script:"curl -s localhost:9000",returnStdout:true)
+                json = readJSON text: jsonText
+                if (json[0].firstName == "lokesh"){
+                  currentBuild.result = 'SUCCESS'
+                } else {
+                  currentBuild.result = 'FAILURE'
+                }
+              }
+            )
+          }
         }
       }
     }
