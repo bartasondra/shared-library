@@ -6,7 +6,9 @@ def call(){
 /*
       stage("test"){
         steps{
-          sh "mvn test"
+          config = libraryResource("someconfig.json")
+          json = readJSON text: config
+          json[env].url
         }
       }
 
