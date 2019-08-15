@@ -12,7 +12,7 @@ def call(){
 
       stage("build"){
         steps{
-          sh "mvn package"
+          maven.install()
         }
       }
 */      
